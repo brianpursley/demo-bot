@@ -2,7 +2,7 @@ import dotenv
 import logging
 import os
 
-from custom_tools import northwind_api_tools
+import custom_tools
 from langchain.memory import ConversationBufferMemory
 from langchain_community.chat_message_histories.postgres import PostgresChatMessageHistory
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -40,7 +40,8 @@ llm = ChatOpenAI(model="gpt-3.5-turbo-1106", temperature=0)
 
 
 tools = [
-    *northwind_api_tools,
+    *custom_tools.northwind_api_tools,
+    *custom_tools.email_api_tools,
 ]
 
 # prompt = hub.pull("hwchase17/openai-tools-agent")

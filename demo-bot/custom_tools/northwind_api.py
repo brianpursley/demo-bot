@@ -14,6 +14,7 @@ def api_get(url):
         f"{NORTHWIND_API_URL}{url}",
         headers={"Authorization": f"Bearer {NORTHWIND_API_TOKEN}"}
     )
+    response.raise_for_status()
     return response.json()
 
 

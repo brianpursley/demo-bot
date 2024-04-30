@@ -1,12 +1,20 @@
+import os
+
+import dotenv
 from fastapi import FastAPI
 from .routers import categories, products
 from .dependencies import database
+
+# TODO: Implement Authentication
+
+dotenv.load_dotenv()
+NORTHWIND_API_URL = os.getenv("NORTHWIND_API_URL")
 
 app = FastAPI(
     title="Northwind API",
     version="1.0.0",
     servers=[
-        {"url": "http://localhost:8000"}
+        {"url": NORTHWIND_API_URL}
     ],
 )
 app.include_router(categories.router)
