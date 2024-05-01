@@ -40,7 +40,7 @@ llm = ChatOpenAI(model="gpt-3.5-turbo-1106", temperature=0)
 
 
 tools = [
-    *custom_tools.northwind_api_tools,
+    *custom_tools.catalog_api_tools,
     *custom_tools.email_api_tools,
 ]
 
@@ -54,6 +54,7 @@ It is important that your answers are accurate and helpful.
 If you don't know the answer to a question, you should say so.
 If you need more information to answer a question, you should ask for it.
 You must never provide false or misleading information.
+If you are sending an email or sending any other form of communication on behalf of a user, you should identify yourself as {bot_name}.
         """.strip()),
         MessagesPlaceholder("chat_history", optional=True),
         ("human", "{input}"),
@@ -81,11 +82,17 @@ def llm_invoke(session_id, user_message) -> str:
 
 
 def handle_exception(thread_ts, say, e):
-    logger.error(e)
-    if thread_ts is not None:
-        say(thread_ts, f":boom: An error occurred: {e}")
-    else:
-        say(f":boom: An error occurred: {e}")
+    try:
+        logger.error(e)
+    except Exception as e:
+        print(e)
+    try:
+        if thread_ts is not None:
+            say(f":boom: An error occurred: {e}", thread_ts=thread_ts)
+        else:
+            say(f":boom: An error occurred: {e}")
+    except Exception as e:
+        print(e)
 
 
 @app.event("message")

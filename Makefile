@@ -7,8 +7,8 @@ install:
 run-demo-bot:
 	$(BIN)/python demo-bot/demo-bot.py
 
-run-northwind-api:
-	$(BIN)/uvicorn northwind-api.app.main:app --port=8000 --reload --reload-dir northwind-api
+run-catalog-api:
+	$(BIN)/uvicorn catalog-api.app.main:app --port=8000 --reload --reload-dir catalog-api
 
 run-email-api:
 	$(BIN)/uvicorn email-api.app.main:app --port=8001 --reload --reload-dir email-api

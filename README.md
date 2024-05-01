@@ -6,10 +6,10 @@
 make install
 ```
 
-## Running the Northwind API
+## Running the Catalog API
 
 ```bash
-make run-northwind-api
+make run-catalog-api
 ```
 
 Check to make sure the API is running @ http://127.0.0.1:8000/docs
