@@ -1,9 +1,7 @@
-import os
-import dotenv
 from databases import Database
+from .config import CATALOG_DATABASE_URL
 
-dotenv.load_dotenv()
-CATALOG_DATABASE_URL = os.getenv("CATALOG_DATABASE_URL")
+print(CATALOG_DATABASE_URL)
 database = Database(CATALOG_DATABASE_URL)
 
 

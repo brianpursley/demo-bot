@@ -4,7 +4,8 @@ DROP TABLE IF EXISTS category;
 
 CREATE TABLE category (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL,
+    description TEXT
 );
 
 CREATE TABLE manufacturer (
@@ -30,12 +31,12 @@ CREATE TABLE product (
 CREATE INDEX idx_product_category_id ON product(category_id);
 CREATE INDEX idx_product_manufacturer_id ON product(manufacturer_id);
 
-INSERT INTO category (name) VALUES
-('Writing Supplies'),
-('Paper Products'),
-('Office Furniture'),
-('Technology'),
-('Cleaning Supplies');
+INSERT INTO category (name, description) VALUES
+('Writing Supplies', 'A wide variety of writing tools including pens, pencils, markers, and highlighters.'),
+('Paper Products', 'All types of paper products such as notebooks, printer paper, and sticky notes.'),
+('Office Furniture', 'Essential furniture for office spaces including desks, chairs, and filing cabinets.'),
+('Technology', 'Latest technology gadgets and accessories including computers, printers, and software.'),
+('Cleaning Supplies', 'Cleaning materials and supplies to keep your office space neat and tidy.');
 
 INSERT INTO manufacturer (name, address, city, state, zip, email, phone) VALUES
 ('PenCraft', '1234 Inkwell Ave', 'Scriptown', 'NY', '10001', 'manufacturer1@cinlogic.com', '2125550101'),

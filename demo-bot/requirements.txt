@@ -1,0 +1,7 @@
+openai~=1.23.6
+pydantic~=2.6.4
+python-dotenv~=1.0.1
+requests~=2.31.0
+slack-bolt==1.18.1
+slack_sdk==3.27.1
+uvicorn~=0.29.0

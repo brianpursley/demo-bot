@@ -1,27 +1,44 @@
 import requests
 
-from langchain_core.tools import tool
-import os
-import dotenv
-
-dotenv.load_dotenv()
-EMAIL_API_URL = os.getenv("EMAIL_API_URL")
-EMAIL_API_TOKEN = os.getenv("EMAIL_API_TOKEN")
+from .config import EMAIL_API_URL, EMAIL_API_TOKEN
 
 
-@tool
 def send_email(to, subject, body):
-    """
-    Sends an email to the specified recipient, with the specified subject and body.
-    """
     response = requests.post(
         f"{EMAIL_API_URL}/email",
         json={"to": to, "subject": subject, "body": body},
         headers={"Authorization": f"Bearer {EMAIL_API_TOKEN}"}
     )
     response.raise_for_status()
+    return {
+        "result": "Email sent successfully."
+    }
 
 
-email_api_tools = [
-    send_email
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": send_email.__name__,
+            "description": "Sends an email.",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "to": {
+                        "type": "string",
+                        "description": "The recipient email address."
+                    },
+                    "subject": {
+                        "type": "string",
+                        "description": "The email subject."
+                    },
+                    "body": {
+                        "type": "string",
+                        "description": "The email body."
+                    }
+                },
+                "required": ["to", "subject", "body"]
+            }
+        }
+    },
 ]

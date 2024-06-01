@@ -1,14 +1,9 @@
-import os
-
-import dotenv
 from fastapi import FastAPI
 from .routers import categories, manufacturers, products
 from .dependencies import database
+from .config import *
 
 # TODO: Implement Authentication
-
-dotenv.load_dotenv()
-CATALOG_API_URL = os.getenv("CATALOG_API_URL")
 
 app = FastAPI(
     title="Catalog API",
