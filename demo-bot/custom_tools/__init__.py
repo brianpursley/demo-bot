@@ -1,2 +1,7 @@
-from .email_api import email_api_tools
-from .catalog_api import catalog_api_tools
+from .email_api import *
+from .catalog_api import *
+
+tools = [
+    *email_api.tools,
+    *catalog_api.tools,
+]
